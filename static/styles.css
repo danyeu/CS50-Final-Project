@@ -1,0 +1,72 @@
+:root {
+    --dbg1: #212529 !important;
+    --dbg2: #444d55 !important;
+    --dtx1: #f1f2f4 !important;
+    --dtx2: #d5d9dd !important;
+    --dtx3: #b8bfc6 !important;
+    --dtx4: #9ca6b0 !important;
+    --dtx5: #808c99 !important;
+    --dtx6: #66737f !important;
+    --dng: #14e790;
+    --dnr: #ff0f4d;
+  }
+.dnr {
+    color: var(--dnr);
+}
+.dng {
+    color: var(--dng);
+}
+.dtx2 {
+    color: var(--dtx2);
+}
+
+
+body {
+    background: var(--dbg2);
+    font-family: 'Lato', sans-serif;
+    color: white;
+}
+
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+nav .navbar-brand .g
+{
+    color: var(--dng);
+}
+nav .navbar-brand .r
+{
+    color: var(--dnr);
+}
+
+.bg-dark {
+    background: var(--dbg1);
+    color: var(--dtx1);
+}
+
+.btn-dark {
+    background: var(--dbg1);
+}
+
+.about {
+    overflow-wrap: break-word;
+}
+
+h4 {
+    margin-bottom: 0rem;
+}
+
+table {
+    color: #d5d9dd !important;
+    border-color: var(--dtx2);
+}
+
+.table-dark {
+    border-bottom-color: var(--dtx2);
+}
+
+footer {
+    color: var(--dtx5);
+}
