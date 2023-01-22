@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stocks
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="mb-3">
+            <h4>
+                <span class="dnr">{{ symbol }}:</span><span class = "dng"> {{ name }}</span>
+            </h4>
+        </div>
+        <div class="mb-3">
+            <h4>
+                {{ r }}
+            </h4>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-xl-8">
+        <div class="chart-container justify-content-center" style="position: relative; aspect-ratio: 16 / 9;">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [
+                        {% for date in dataset_dates %}
+                        '{{date}}',
+                        {% endfor %}
+                    ],
+                    datasets: [{
+                        label: "Price",
+                        fontColor: '#d5d9dd',
+                        backgroundColor: "#14e790",
+                        data: [
+                            {% for price in dataset_prices %}
+                            {{price}},
+                            {% endfor %}
+                        ],
+                        borderColor: "#14e790",
+                        borderWidth: 2,
+                        pointStyle: 'circle',
+                        pointRadius: 1,
+                        pointBackgroundColor: "#14e790"
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            ticks: {
+                                color: '#d5d9dd'
+                            },
+                            grid: {
+                                color: '#66737f'
+                            },
+                            border: {
+                                color: '#d5d9dd'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#d5d9dd'
+                            },
+                            grid: {
+                                display: false
+                            },
+                            border: {
+                                color: '#d5d9dd'
+                            }
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#d5d9dd'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+</div>
+{% endblock %}

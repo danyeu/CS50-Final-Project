@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col">
+        <form action="/register" method="post">
+            <div class="mb-3">
+                <h4>Register</h4>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm Password" type="password">
+            </div>
+            <button class="btn btn-dark" type="submit">Register</button>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="position-fixed bottom-0 start-50 translate-middle-x">
+            <div class="alert alert-danger mx-auto w-auto h-auto" id="alert" role="alert" style="display: none;">{{ alert_text }}</div>
+            <script>
+                var alert = document.getElementById("alert");
+                if (alert.innerHTML != "NONE") {
+                    alert.style.display = "block";
+                    removeFadeOut(alert);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

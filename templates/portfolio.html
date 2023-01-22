@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="mb-3">
+            <h4>Portfolio</h4>
+        </div>
+            <input id="update" type="submit" form="weights" value="Update" class="btn btn-dark" style="width: 5rem;">
+            <a href="/resetportfolio" type="button" class="btn btn-danger" style="width: 5rem;">Reset</a>
+        <script>
+            function validateWeights(){
+                var arr = document.querySelectorAll(".weight");
+                var sum = 0;
+                individual_ok = true;
+                sum_ok = true;
+                for (var i = 0; i < arr.length; i++) {
+                    weight_i = parseInt(arr[i].value);
+                    if(weight_i) {
+                        sum += weight_i;
+                        if (weight_i < 0) {
+                            individual_ok = false;
+                        }
+                    }
+                }
+                document.getElementById("sum").placeholder = 100 - sum;
+                if (sum < 0 || sum > 100) {
+                    sum_ok = false;
+                }
+                if (individual_ok && sum_ok) {
+                    document.getElementById("update").disabled = false;
+                }
+                else {
+                    document.getElementById("update").disabled = true;
+                }
+            }
+        </script>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-xl-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-start">Name</th>
+                    <th class="text-middle">Symbol</th>
+                    <th class="text-middle" width="6rem">Weight (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-dark">
+                    <th scope="row" class="text-start align-middle w-auto">Cash</th>
+                    <td class="text-middle align-middle"></td>
+                    <td class="text-middle align-middle" width="6rem">
+                        <input id="sum" class="form-control" type="number" placeholder="{{ cash }}" style="width: 5rem; display: inline-block;" disabled readonly>
+                    </td>
+                </tr>
+                <form id="weights" action="/portfolio" method="post">
+                {% for row in db_portfolios_raw %}
+                    <tr>
+                        <th scope="row" class="text-start align-middle">{{ row.name }}</th>
+                        <td class="text-middle align-middle">{{ row.symbol }}</td>
+                        <td class="text-middle align-middle" style="white-space:nowrap;" width="6rem">
+                            <input oninput="validateWeights()" class="form-control weight" type="number" min="0" max="100" step="1" id="{{ row.symbol }}" name="{{ row.symbol }}" value="{{ row.weight }}" style="width: 5rem; display: inline-block;">
+                        </td>
+                    </tr>
+                {% endfor %}
+                </form>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="position-fixed bottom-0 start-50 translate-middle-x">
+            <div class="alert alert-danger mx-auto w-auto h-auto" id="alert" role="alert" style="display: none;">{{ alert_text }}</div>
+            <script>
+                var alert = document.getElementById("alert");
+                if (alert.innerHTML == "Success") {
+                    alert.classList.replace("alert-danger", "alert-success")
+                    alert.style.display = "block";
+                    removeFadeOut(alert);
+                }
+                else if (alert.innerHTML != "NONE") {
+                    alert.style.display = "block";
+                    removeFadeOut(alert);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

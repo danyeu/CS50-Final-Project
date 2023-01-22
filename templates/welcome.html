@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block main %}
+
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="mb-3">
+            <h4>Welcome to "Beat the Market: 2022"</h4>
+        </div>
+        <div class="dtx2">
+            <div class="about mb-3">
+                Stock markets performed very poorly in 2022.<br>
+                The S&P 500 returned <span class="dnr">-19.44%</span>, its worst performance since 2008!<br>
+            </div>
+            <div class="about mb-3">
+                In this website, your goal is to beat the market.<br>
+                You are given a choice of the 50 largest companies in the S&P 500.<br>
+                You decide how much of each stock to include in your portfolio, if any.<br>
+            </div>
+            <div class="about mb-3">
+                You <i>could</i> just hold cash, but try to allocate everything.<br>
+                How hard can it be to beat -19.44%?
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col">
+        <footer class="text-center small">
+            <a href="https://www.linkedin.com/in/dy-808/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+                Created by Daniel Yeung<br>
+                <img src="/static/in.png" alt="LinkedIn" width="16px" height="16px">
+            </a>
+        </footer>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stocks
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="mb-3">
+            <h4>
+                Stocks
+            </h4>
+        </div>
+        <form action="/stocks" method="post">
+            <select class="form-select mx-auto w-auto mb-3" id="symbol" name="symbol">
+                <option disabled selected>Select a stock...</option>
+                {% for row in db_names_raw %}
+                    <option value="{{row.symbol}}">{{row.name}}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-dark" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="position-fixed bottom-0 start-50 translate-middle-x">
+            <div class="alert alert-danger mx-auto w-auto h-auto" id="alert" role="alert" style="display: none;">{{ alert_text }}</div>
+            <script>
+                var alert = document.getElementById("alert");
+                if (alert.innerHTML != "NONE") {
+                    alert.style.display = "block";
+                    removeFadeOut(alert);
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
